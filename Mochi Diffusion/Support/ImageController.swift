@@ -70,7 +70,14 @@ final class ImageController: ObservableObject {
     private var quicklookId: UUID? {
         didSet {
             quicklookURL = quicklookId.flatMap { id in
-                try? ImageStore.shared.image(with: id)?.image?.asNSImage().temporaryFileURL()
+                if (ImageStore.shared.image(with: id)?.imageSource) != nil {
+                    let imgSource = ImageStore.shared.image(with: id)?.imageSource
+                    let imageIndex = CGImageSourceGetPrimaryImageIndex(imgSource!)
+                    let cgImage = CGImageSourceCreateImageAtIndex(imgSource!, imageIndex, nil)
+                    return try? cgImage!.asNSImage().temporaryFileURL()
+                } else {
+                    return try? ImageStore.shared.image(with: id)?.image?.asNSImage().temporaryFileURL()
+                }
             }
         }
     }

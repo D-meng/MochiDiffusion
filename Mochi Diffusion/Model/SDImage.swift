@@ -15,6 +15,7 @@ import UniformTypeIdentifiers
 struct SDImage: Identifiable, Hashable {
     var id = UUID()
     var image: CGImage?
+    var imageSource: CGImageSource?
     var prompt = ""
     var negativePrompt = ""
     var width: Int { self.image?.width ?? 0 }

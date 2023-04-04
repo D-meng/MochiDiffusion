@@ -23,7 +23,15 @@ func createSDImageFromURL(_ url: URL) -> SDImage? {
     guard let dateModified = maybeDateModified else { return nil }
     guard let cgImageSource = CGImageSourceCreateWithURL(url as CFURL, nil) else { return nil }
     let imageIndex = CGImageSourceGetPrimaryImageIndex(cgImageSource)
-    guard let cgImage = CGImageSourceCreateImageAtIndex(cgImageSource, imageIndex, nil) else { return nil }
+    // Create thumbnail by scaling proportionally based on the larger dimension
+    let thumbnailInfo: [CFString: Any] = [
+        kCGImageSourceCreateThumbnailFromImageAlways: true,
+        kCGImageSourceThumbnailMaxPixelSize: 300,
+        kCGImageSourceCreateThumbnailWithTransform: true
+    ]
+    guard let cgImage = CGImageSourceCreateThumbnailAtIndex(cgImageSource, imageIndex, thumbnailInfo as CFDictionary) else { return nil }
+    
+//    guard let cgImage = CGImageSourceCreateImageAtIndex(cgImageSource, imageIndex, nil) else { return nil }
     guard let properties = CGImageSourceCopyPropertiesAtIndex(cgImageSource, 0, nil) else { return nil }
     guard let propDict = properties as? [String: Any] else { return nil }
     guard let tiffProp = propDict[kCGImagePropertyTIFFDictionary as String] as? [String: Any] else { return nil }
@@ -31,6 +39,7 @@ func createSDImageFromURL(_ url: URL) -> SDImage? {
     var sdi = SDImage(
         id: UUID(),
         image: cgImage,
+        imageSource: cgImageSource,
         aspectRatio: CGFloat(Double(cgImage.width) / Double(cgImage.height)),
         generatedDate: dateModified,
         path: url.path(percentEncoded: false)
