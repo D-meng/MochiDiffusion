@@ -19,7 +19,7 @@ struct PromptTextEditor: View {
 
     @EnvironmentObject private var generator: ImageGenerator
 
-    private let tokenLimit = 75
+    private let tokenLimit = 400
 
     private var estimatedTokens: Int {
         let whitespaceCount = text.components(separatedBy: .whitespacesAndNewlines).count - 1
