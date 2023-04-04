@@ -22,7 +22,7 @@
 
 ## 简介
 
-本应用内置 [Apple 的 Core ML Stable Diffusion 框架](https://github.com/apple/ml-stable-diffusion) 以实现在搭载 Apple 芯片的 Mac 上用极低的内存占用发挥出最优性能，并同时兼容搭载 Intel 芯片的 Mac。
+本应用内置 [Apple 的 Core ML Stable Diffusion 框架](https://github.com/apple/ml-stable-diffusion) 以实现在搭载 Apple 芯片的 Mac 上用极低的内存占用发挥出最优性能。
 
 ## 功能
 
@@ -52,22 +52,20 @@
 
 你需要根据不同的计算单元选择对应的模型 (详情见模型部分)。
 
-搭载 Intel 芯片的 Mac 只能使用 `CPU 和 GPU`，因其没有配备神经网络引擎。
-
 ## 模型
 
 你需要自行转换或下载 Core ML 模型以使用 Mochi Diffusion。
 
 [这里](https://huggingface.co/coreml) 上传了几个已经转换好的模型
 
-1. [转换](https://github.com/godly-devotion/MochiDiffusion/wiki/How-to-convert-ckpt-or-safetensors-files-to-Core-ML) 或下载 Core ML 模型
+1. [转换](https://github.com/godly-devotion/MochiDiffusion/wiki/How-to-convert-Stable-Diffusion-models-to-Core-ML) 或下载 Core ML 模型
     - `split_einsum` 版本适用于包括神经网络引擎在内的所有计算单元
     - `original` 版本仅适用于 `CPU 和 GPU`
-2. 本应用默认在 文稿 中创建一个模型文件夹，但你可以在应用设置中自定义其路径。
+2. 默认情况下，应用程序的模型文件夹将创建在您的主目录下。 可以在“设置”下自定义此位置
 3. 在模型文件夹中，你可以新建一个文件夹，用自己想在应用内显示的名字为其重命名，再将转换好的模型放到文件夹中
 4. 你的文件夹路径应该像这样:
 ```
-文稿/
+<主目录>/
 └── MochiDiffusion/
     └── models/
         ├── stable-diffusion-2-1_split-einsum_compiled/
@@ -83,7 +81,7 @@
 
 ## 兼容性
 
-- Apple 芯片的 Mac (M1 及后续) 或 Intel 芯片的 Mac (需要高性能 CPU 和 GPU)
+- Apple 芯片的 Mac (M1 及后续)
 - macOS Ventura 13.1 以上
 - Xcode 14.2 (自行构建)
 

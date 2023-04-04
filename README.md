@@ -22,7 +22,7 @@
 
 ## Description
 
-This app uses [Apple's Core ML Stable Diffusion implementation](https://github.com/apple/ml-stable-diffusion) to achieve maximum performance and speed on Apple Silicon based Macs while reducing memory requirements. It also runs on Intel based Macs too.
+This app uses [Apple's Core ML Stable Diffusion implementation](https://github.com/apple/ml-stable-diffusion) to achieve maximum performance and speed on Apple Silicon based Macs while reducing memory requirements.
 
 ## Features
 
@@ -52,22 +52,20 @@ When using a model for the very first time, it may take up to 2 minutes for the 
 
 Depending on the option chosen, you will need to use the correct model version (see Models section for details).
 
-Intel Macs uses `CPU & GPU` as it doesn't have Neural Engine.
-
 ## Models
 
 You will need to convert or download Core ML models in order to use Mochi Diffusion.
 
 A few models have been converted and uploaded [here](https://huggingface.co/coreml).
 
-1. [Convert](https://github.com/godly-devotion/MochiDiffusion/wiki/How-to-convert-ckpt-or-safetensors-files-to-Core-ML) or download Core ML models
+1. [Convert](https://github.com/godly-devotion/MochiDiffusion/wiki/How-to-convert-Stable-Diffusion-models-to-Core-ML) or download Core ML models
     - `split_einsum` version is compatible with all compute unit options including Neural Engine
     - `original` version is only compatible with `CPU & GPU` option
-2. By default, the app's model folder will be created under the Documents folder. This location can be customized under Settings
+2. By default, the app's model folder will be created under your home directory. This location can be customized under Settings
 3. In the model folder, create a new folder with the name you'd like displayed in the app then move or extract the converted models here
-4. Your directory should look like this:
+4. Your directory structure should look like this:
 ```
-Documents/
+<Home Directory>/
 └── MochiDiffusion/
     └── models/
         ├── stable-diffusion-2-1_split-einsum_compiled/
@@ -83,7 +81,7 @@ Documents/
 
 ## Compatibility
 
-- Apple Silicon (M1 and later) or Intel Mac (high performance CPU & GPU required)
+- Apple Silicon (M1 and later)
 - macOS Ventura 13.1 and later
 - Xcode 14.2 (to build)
 
