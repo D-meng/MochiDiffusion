@@ -185,6 +185,8 @@ class ImageGenerator: ObservableObject {
                     guard let upscaledImg = await Upscaler.shared.upscale(cgImage: image) else { continue }
                     sdi.image = upscaledImg
                     sdi.aspectRatio = CGFloat(Double(upscaledImg.width) / Double(upscaledImg.height))
+                    sdi.width = Int(upscaledImg.width)
+                    sdi.height = Int(upscaledImg.height)
                     sdi.upscaler = "RealESRGAN"
                 } else {
                     sdi.image = image

@@ -70,6 +70,10 @@ func createSDImageFromURL(_ url: URL) -> SDImage? {
             sdi.scheduler = Scheduler(rawValue: String(value))!
         case Metadata.mlComputeUnit:
             sdi.mlComputeUnit = MLComputeUnits.fromString(value)
+        case Metadata.size:
+            let arr = value.components(separatedBy: "x")
+            sdi.width = Int(arr.first!) ?? 0
+            sdi.height = Int(arr.last!) ?? 0
         case Metadata.generator:
             guard let index = value.lastIndex(of: " ") else { break }
             let start = value.index(after: index)
